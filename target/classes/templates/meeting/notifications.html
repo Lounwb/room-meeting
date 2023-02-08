@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Meeting会议管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}" href="../css/common.css"/>
+</head>
+<body>
+<div th:replace="common :: top"></div>
+<div th:replace="common :: left_side"></div>
+<div class="page-body">
+    <div class="page-content">
+        <div class="content-nav">
+            个人中心 > <a href="/notifications" th:href="@{/mt/notifications.html}">最新通知</a>
+        </div>
+        <table class="listtable">
+            <caption>
+                未来7天我要参加的会议:
+            </caption>
+            <div th:if="${meetingList.size()}>0">
+                <tr class="listheader">
+                    <th style="width:300px">会议名称</th>
+                    <th>会议室</th>
+                    <th>起始时间</th>
+                    <th>结束时间</th>
+                    <th style="width:100px">操作</th>
+                </tr>
+                <tr th:each="m:${meetingList}">
+                    <td th:text="${m.meetingName}">${m.meetingname}</td>
+                    <td th:text="${m.roomId}">${m.roomname}</td>
+                    <td th:text="${m.startTime}">${m.starttime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                    <td th:text="${m.endTime}">${m.endtime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                    <td>
+                        <a class="clickbutton" href="/meetingdetails?meetingid=${m.meetingid}" th:href="@{/mt/detail(id=${m.meetingId})}">查看详情</a>
+                    </td>
+                </tr>
+            </div>
+        </table>
+        <div th:if="${meetingList.size()}==0">
+            <tr>未来七天不需要参加会议</tr>
+        </div>
+        <table class="listtable">
+            <caption>
+                已取消的会议:
+            </caption>
+            <div th:if="${cancelMeetingList.size()}>0">
+                <tr class="listheader">
+                    <th style="width:300px">会议名称</th>
+                    <th>会议室</th>
+                    <th>起始时间</th>
+                    <th>结束时间</th>
+                    <th>取消原因</th>
+                    <th style="width:100px">操作</th>
+                </tr>
+                <tr th:each="cm:${cancelMeetingList}">
+                    <td th:text="${cm.meetingName}">${cm.meetingname}</td>
+                    <td th:text="${cm.meetingName}">${cm.roomname}</td>
+                    <td th:text="${cm.startTime}">${cm.starttime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                    <td th:text="${cm.endTime}">${cm.endtime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                    <td th:text="${cm.canceledReason}">${cm.canceledreason!"没理由"}</td>
+                    <td>
+                        <a class="clickbutton" href="/meetingdetails?meetingid=${cm.meetingid}" th:href="@{/mt/detail(id=${cm.meetingId})}">查看详情</a>
+                    </td>
+                </tr>
+            </div>
+        </table>
+        <div th:if="${cancelMeetingList.size()}==0">
+            没有取消的会议
+        </div>
+
+    </div>
+</div>
+<div class="page-footer">
+    <hr/>
+    更多问题，欢迎联系<a href="mailto:578173534@qq.com">管理员</a>
+    <img src="../images/footer.png" th:src="@{/images/footer.png}" alt="Meeting"/>
+</div>
+</body>
+</html>

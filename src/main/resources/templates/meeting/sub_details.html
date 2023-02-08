@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Meeting会议管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}" href="/styles/common.css"/>
+</head>
+<body onload="body_load()">
+<div th:replace="common :: top"></div>
+<div th:replace="common :: left_side"></div>
+<div class="page-body">
+    <div class="page-content">
+        <div class="content-nav">
+            会议预定 > 修改会议预定
+        </div>
+        <form action="/cancelmeeting" th:action="@{/mt/cancel}" method="get">
+            <fieldset>
+                <legend>会议信息</legend>
+                <table class="formtable">
+                    <tr>
+                        <td>会议名称：</td>
+                        <td th:text="${meeting.meetingName}">${meeting.meetingname}</td>
+                    </tr>
+                    <tr>
+                        <td>预计参加人数：</td>
+                        <td th:text="${meeting.numberOfParticipants}">${meeting.numberofparticipants}</td>
+                    </tr>
+                    <tr>
+                        <td>预计开始时间：</td>
+                        <td th:text="${meeting.startTime}">${meeting.starttime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                    </tr>
+                    <tr>
+                        <td>预计结束时间：</td>
+                        <td th:text="${meeting.endTime}">${meeting.endtime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                    </tr>
+                    <tr>
+                        <td>会议说明：</td>
+                        <td>
+                            <textarea id="description" rows="5"  th:text="${meeting.description}" readonly>${meeting.description!'NO'}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>参会人员：</td>
+                        <td>
+                            <table class="listtable">
+                                <tr class="listheader">
+                                    <th>姓名</th>
+                                    <th>联系电话</th>
+                                    <td>电子邮件</td>
+                                </tr>
+                                <tr th:each="e:${participants}">
+                                    <td th:text="${e.employeeName}">${e.employeeName}</td>
+                                    <td th:text="${e.phone}">${e.phone!"空"}</td>
+                                    <td th:text="${e.email}">${e.email!"空"}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="command" colspan="4">
+                            <input name="meetingId" type="hidden" value="${meeting.meetingid}" th:value="${meeting.meetingId}"/>
+                            <input type="submit" class="clickbutton" value="撤销会议"/>
+                            <input type="button" class="clickbutton" value="返回" onclick="window.history.back();"/>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="page-footer">
+    <hr/>
+    更多问题，欢迎联系<a href="mailto:578173534@qq.com">管理员</a>
+    <img src="/images/footer.png" th:src="@{/images/footer.png}" alt="Meeting"/>
+</div>
+</body>
+</html>

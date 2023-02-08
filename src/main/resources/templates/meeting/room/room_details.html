@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Meeting会议管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}" href="../css/common.css"/>
+</head>
+<body>
+<div th:replace="common :: top"></div>
+<div th:replace="common :: left_side"></div>
+<div class="page-body">
+    <div class="page-content">
+        <div class="content-nav">
+            会议预定 > 修改会议室信息
+        </div>
+        <form action="/updateroom" th:action="@{/mtr/update}" method="post">
+            <fieldset>
+                <legend>会议室信息</legend>
+                <table class="formtable">
+                    <tr>
+                        <td>门牌号:</td>
+                        <td>
+                            <input name="roomNum" id="roomnumber" type="text" th:value="${room.roomNum}" maxlength="10"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>会议室名称:</td>
+                        <td>
+                            <input name="roomName" id="capacity" type="text" th:value="${room.roomName}"  maxlength="20"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>最多容纳人数：</td>
+                        <td>
+                            <input name="capacity" id="roomcapacity" type="text" th:value="${room.capacity}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>当前状态：</td>
+                        <td>
+                            <div th:if="${room.status}==0">
+                                <input type="radio" class="status" name="status" checked="checked" value="0"/><label
+                                    for="status">启用</label>
+                                <input type="radio" class="status" value="1" name="status"/><label for="status" value="1">已占用</label>
+                            </div>
+                            <div th:if="${room.status}!=0">
+                                <input type="radio" class="status" name="status" value="0"/><label
+                                    for="status">启用</label>
+                                <input type="radio" class="status" name="status" value="1" checked="checked"/><label for="status"
+                                                                                                                  value="1">已占用</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注：</td>
+                        <td>
+                            <textarea name="description" id="description" maxlength="200" rows="5"
+                                      cols="60" th:text="${room.description}">${mr.description}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="command">
+                            <input type="hidden" th:value="${room.roomId}" name="roomId">
+                            <input type="submit" value="确认修改" class="clickbutton"/>
+                            <input type="button" class="clickbutton" value="返回" onclick="window.history.back();"/>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="page-footer">
+    <hr/>
+    更多问题，欢迎联系<a href="mailto:578173534@qq.com">管理员</a>
+    <img th:src="@{/images/footer.png}" src="../images/footer.png" alt="Meeting"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Meeting会议管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}" href="/styles/common.css"/>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div th:replace="common :: top"></div>
+<div th:replace="common :: left_side"></div>
+<div class="page-body">
+    <div class="page-content">
+        <div class="content-nav">
+            个人中心 > 我的预定
+        </div>
+        <table class="listtable">
+            <caption>我预定的会议：</caption>
+            <tr class="listheader">
+                <th>会议名称</th>
+                <th>会议室名称</th>
+                <th>会议开始时间</th>
+                <th>会议结束时间</th>
+                <th>会议预定时间</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="m:${myMeetingList}">
+                <td th:text="${m.meetingName}">${m.meetingname}</td>
+                <td th:text="${m.roomId}">${m.roomname}</td>
+                <td th:text="${m.startTime}">${m.starttime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                <td th:text="${m.endTime}">${m.endtime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                <td th:text="${m.reservationTime}">${m.reservationtime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                <td>
+                    <a class="clickbutton" href="/mymeetingdetails?meetingid=${m.meetingid}" th:href="@{/mt/sub_detail(id=${m.meetingId})}">查看/撤销</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="page-footer">
+    <hr/>
+    更多问题，欢迎联系<a href="mailto:578173534@qq.com">管理员</a>
+    <img src="/images/footer.png" th:src="@{/images/footer.png}" alt="Meeting"/>
+</div>
+</body>
+</html>

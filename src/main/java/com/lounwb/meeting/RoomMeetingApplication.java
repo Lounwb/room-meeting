@@ -1,0 +1,15 @@
+package com.lounwb.meeting;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@MapperScan("com.lounwb.meeting.mapper")
+@SpringBootApplication
+public class RoomMeetingApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RoomMeetingApplication.class, args);
+    }
+
+}

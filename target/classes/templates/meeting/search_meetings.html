@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Meeting会议管理系统</title>
+    <link th:href="@{/css/common.css}" href="/styles/common.css" rel="stylesheet"/>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="/My97DatePicker/WdatePicker.js" th:src="@{/My97DatePicker/WdatePicker.js}"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div th:replace="common :: top"></div>
+<div th:replace="common :: left_side"></div>
+<div class="page-body">
+    <div class="page-content">
+        <div class="content-nav">
+            会议预定 > 搜索会议
+        </div>
+        <form action="/searchmeetings" th:action="@{/mt/search}" method="post">
+            <fieldset>
+                <legend>搜索会议</legend>
+                <table class="formtable">
+                    <tr>
+                        <td>会议名称：</td>
+                        <td>
+                            <input type="text" name="meetingName" id="meetingname" maxlength="20"/>
+                        </td>
+                        <td>会议室名称：</td>
+                        <td>
+                            <input type="text" name="roomName" id="roomname" maxlength="20"/>
+                        </td>
+                        <td>预定者姓名：</td>
+                        <td>
+                            <input type="text" name="reservationIstName" id="reservationistname" maxlength="20"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>预定日期：</td>
+                        <td colspan="6">
+                            在&nbsp;<input class="Wdate" type="text" name="reservationTime" id="reservationtime"
+                                          onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>以后
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>会议日期：</td>
+                        <td colspan="6">
+                            从&nbsp; <input class="Wdate" type="text" id="starttime" name="starTtime"
+                                           onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                            到&nbsp;<input class="Wdate" type="text" id="endtime" name="endTime"
+                                          onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="command">
+                            <input type="submit" class="clickbutton" value="查询"/>
+                            <input type="reset" class="clickbutton" value="重置"/>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+        <div>
+            <h3 style="text-align:center;color:#000000">查询结果</h3>
+            <div class="pager-header">
+                <div class="header-info">
+                    共<span class="info-number" th:text="${page.total}">[[${page.total}]]</span>条结果,
+                    分成<span class="info-number">[[${page.pages}]]</span>页显示,
+                    当前第<span class="info-number">[[${page.current}]]</span>页
+                </div>
+                <div class="header-nav">
+                    <a type="button" class="clickbutton" href="/searchmeetings?&page=1" th:href="@{/mt/search(pn=1)}">首页</a>
+
+                    <a type="button" class="clickbutton" th:if="${page.current}!=1"
+
+                     th:href="@{/mt/search(pn=${page.current}-1)}" href="/searchmeetings?&page=${page-1}"
+
+                    >上页</a>
+                    <a type="button" class="clickbutton" th:if="${page.current}!=${page.pages}"
+                     th:href="@{/mt/search(pn=${page.current}+1)}"
+                    >下页</a>
+                    <a type="button" class="clickbutton"
+                       href="/searchmeetings?page=${pagenum}" th:href="@{/mt/search(pn=${page.pages})}">末页</a>
+                    <form action="" style="display: inline" method="get">
+                        跳到第<input name="pn" type="text" id="pagenum" class="nav-number"/>页
+                        <input type="submit" class="clickbutton" value="跳转"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <table class="listtable">
+            <tr class="listheader">
+                <th>会议名称</th>
+                <th>会议室名称</th>
+                <th>会议开始时间</th>
+                <th>会议结束时间</th>
+                <th>会议预定时间</th>
+                <th>预定者</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="m:${page.records}">
+                <td th:text="${m.meetingName}">${m.meetingname}</td>
+                <td th:text="${m.roomId}">${m.roomname}</td>
+                <td th:text="${m.startTime}">${m.starttime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                <td th:text="${m.endTime}">${m.endtime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                <td th:text="${m.reservationTime}">${m.reservationtime?string('yyyy-MM-dd HH:mm:ss')}</td>
+                <td th:text="${m.subscriberId}">${m.reservationistname}</td>
+                <td>
+                    <a class="clickbutton" href="/meetingdetails?meetingid=${m.meetingid}" th:href="@{/mt/detail(id=${m.meetingId})}">查看详情</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="page-footer">
+    <hr/>
+    更多问题，欢迎联系<a href="mailto:578173534@qq.com">管理员</a>
+    <img src="/images/footer.png" th:src="@{/images/footer.png}" alt="Meeting"/>
+</div>
+</body>
+</html>
