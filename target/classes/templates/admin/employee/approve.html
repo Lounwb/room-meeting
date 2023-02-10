@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Meeting会议管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}" href="../css/common.css"/>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div th:replace="common :: top"></div>
+<div th:replace="common :: left_side"></div>
+<div class="page-body">
+    <div class="page-content">
+        <div class="content-nav">
+            人员管理 > 注册审批
+        </div>
+        <table class="listtable">
+            <caption>所有待审批注册信息：</caption>
+            <tr class="listheader">
+                <th>姓名</th>
+                <th>账号名</th>
+                <th>联系电话</th>
+                <th>电子邮件</th>
+                <th>操作</th>
+            </tr>
+            <tr th:each="emp:${employeeList}">
+                <td th:text="${emp.employeeName}">${emp.employeeName}</td>
+                <td th:text="${emp.username}">${emp.username}</td>
+                <td th:text="${emp.phone}">${emp.phone}</td>
+                <td th:text="${emp.email}">${emp.email}</td>
+                <td>
+                    <a type="button" class="clickbutton" th:href="@{/admin/emp/doApprove(id=${emp.employeeId},status=1)}">通过</a>
+                    <a type="button" class="clickbutton" th:href="@{/admin/emp/doApprove(id=${emp.employeeId},status=2)}">不通过</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="page-footer">
+    <hr/>
+    更多问题，欢迎联系<a href="mailto:578173534@qq.com">管理员</a>
+    <img src="../images/footer.png" th:src="@{/images/footer.png}" alt="Meeting"/>
+</div>
+</body>
+</html>

@@ -11,11 +11,13 @@ import com.lounwb.meeting.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -102,7 +104,13 @@ public class MeetingController {
         return "meeting/search_meetings";
     }
     @PostMapping("/search")
-    public String postSearch(){
+    public String postSearch(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
+//        String meetingName = meeting.getMeetingName();
+//        Page<Meeting> page = new Page<>(pn, 5);
+//        QueryWrapper<Meeting> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.like(, "meeting_name", );
+//        meetingService.page();
+
         return "redirect:/mt/search";
     }
 }

@@ -11,4 +11,6 @@ public interface EmployeeService extends IService<Employee> {
     List<Employee> getEmpByDepId(String depId);
 
     Employee getEmpByNameAndStatus(String username, Integer status);
+
+    boolean updateStatusById(String id, Integer status);
 }

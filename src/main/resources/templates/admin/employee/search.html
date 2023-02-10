@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Meeting会议管理系统</title>
-    <link rel="stylesheet" href="/styles/common.css"/>
+    <link rel="stylesheet" th:href="@{/css/common.css}" href="../css/common.css"/>
     <style type="text/css">
 
     </style>
 </head>
 <body>
-<#include 'top.ftl'>
+<div th:replace="common :: top"></div>
+<div th:replace="common :: left_side"></div>
 <div class="page-body">
-    <#include 'leftMenu.ftl'>
     <div class="page-content">
         <div class="content-nav">
             会议预定 > 搜索员工
@@ -128,7 +128,7 @@
 <div class="page-footer">
     <hr/>
     更多问题，欢迎联系<a href="mailto:578173534@qq.com">管理员</a>
-    <img src="/images/footer.png" alt="Meeting"/>
+    <img src="../images/footer.png" th:src="@{/images/footer.png}" alt="Meeting"/>
 </div>
 </body>
 </html>

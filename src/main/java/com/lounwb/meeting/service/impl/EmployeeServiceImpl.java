@@ -31,4 +31,10 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         return employeeMapper.getEmpByNameAndStatus(username, status);
     }
 
+    @Override
+    public boolean updateStatusById(String id, Integer status) {
+
+        return employeeMapper.updateStatusById(id, status);
+    }
+
 }

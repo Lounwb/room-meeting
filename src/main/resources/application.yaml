@@ -4,7 +4,6 @@ spring:
     username: root
     password: litianyu2002
     driver-class-name: com.mysql.cj.jdbc.Driver
-
 server:
   servlet:
     context-path: /meeting

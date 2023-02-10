@@ -12,7 +12,7 @@ public class Department {
     @TableId
 
     //部门编号
-    private Integer departmentId;
+    private String departmentId;
     //部门名称
     private String departmentName;
 

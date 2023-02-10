@@ -17,8 +17,8 @@
         <ul class="sidebar-menu">
             <li class="sidebar-menuitem"><a href="/register" th:href="@{/emp/register}">信息修改</a></li>
             <div th:if="${session.user.role}==2">
-                <li class="sidebar-menuitem"><a href="/admin/departments" th:href="@{/admin/dept/}">部门管理</a></li>
-                <li class="sidebar-menuitem"><a href="/admin/approveaccount" th:href="@{/admin/mt/approve}">注册审批</a></li>
+                <li class="sidebar-menuitem"><a href="/admin/departments" th:href="@{/admin/dept}">部门管理</a></li>
+                <li class="sidebar-menuitem"><a href="/admin/approveaccount" th:href="@{/admin/emp/approve}">注册审批</a></li>
                 <li class="sidebar-menuitem"><a href="/admin/searchemployees?status=1" th:href="@{/admin/emp/search}">搜索员工</a></li>
             </div>
         </ul>
